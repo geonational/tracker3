@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
+<!-- 2016-06-30T14:11:17 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Leaf_Red" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="8e15d519-eab3-497d-b483-a5c1caac3ee0">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="pdb1"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="GN_CONTRACT_ID" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[102]]></defaultValueExpression>
+	</parameter>
+	<parameter name="GN_MONTH" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["JUN"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="GN_YEAR" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[2016]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ORACLE_REF_CURSOR" class="java.sql.ResultSet" isForPrompting="false"/>
+	<parameter name="GN_RPTNUM" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Invoice Number]]></parameterDescription>
+		<defaultValueExpression><![CDATA["30"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="plsql">
+		<![CDATA[{call TIMESHEET.WEEKSUM_HOURS($P{GN_CONTRACT_ID},$P{GN_MONTH},$P{GN_YEAR},$P{ORACLE_REF_CURSOR})}]]>
+	</queryString>
+	<field name="WORK_DATES" class="java.lang.String"/>
+	<field name="SUMHOURS" class="java.math.BigDecimal"/>
+	<field name="RATE" class="java.math.BigDecimal"/>
+	<field name="DOLLAR_TOTAL" class="java.math.BigDecimal"/>
+	<variable name="sumAmount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{DOLLAR_TOTAL}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="302" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="91f5fe7f-a65f-46a3-81ae-30f2d82c45a2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="20"/>
+				</textElement>
+				<text><![CDATA[Geonational, LLC.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="16" width="127" height="30" uuid="2c945927-3b53-468b-bc6d-4919023f626c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INVOICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="190" height="62" uuid="53b3f757-4817-4f7c-9200-8ce3bad292b4"/>
+				<textElement>
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[711 N. Kensington Street
+Arlington, VA, 22205
+Phone 404-512-5778
+steven_moslin@geonational.com ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="149" width="167" height="78" uuid="aa3f7c06-6a4a-49f6-b204-a102e06bbb83"/>
+				<textElement>
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[To:
+SNAP,Inc.
+4080 Lafayette Center Dr.
+Suite 340
+Chantilly, VA 20151]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="408" y="64" width="58" height="16" uuid="aefb7dd2-35d4-45dd-a9ea-02845b333fed"/>
+				<textElement>
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<text><![CDATA[Invoice ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="406" y="102" width="100" height="30" uuid="4aafa490-582f-4e46-a12b-d9542536dfa0"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[For:
+Oracle DBA Services
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="408" y="146" width="72" height="24" uuid="5bffbea0-56eb-42d5-b63f-0e9737126cf6"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[PO # SNAP2]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="467" y="64" width="63" height="17" uuid="fbc57221-0922-4fc5-b792-2134ea701e5b"/>
+				<textElement>
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GN_RPTNUM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="22" y="1" width="100" height="20" uuid="67c857b9-37b6-434c-be86-0ff3a90c3aac"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="52" height="24" uuid="08c3a93a-c07e-4547-a0da-9ef3092c31e0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hours]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="413" y="0" width="48" height="24" uuid="db93cfad-6cde-4038-990a-f43c86d1c2a1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="474" y="0" width="66" height="24" uuid="4bcd33e7-50d2-4d6a-b3bf-cbf4f68225f4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="16" y="4" width="524" height="19" uuid="d28c04bb-b94c-4b07-a125-3d3522c1526b"/>
+			</rectangle>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="20" y="2" width="200" height="19" uuid="f43557b1-3e90-4487-acc8-125f7b4642cf"/>
+				<textFieldExpression><![CDATA[$F{WORK_DATES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="273" y="0" width="100" height="21" uuid="5771d7b0-6133-4d6f-bd68-e31ef59d9fa2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{SUMHOURS}==null?0:$F{SUMHOURS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="52" height="21" uuid="9c90b609-8700-41ad-9c44-f4c53b56669a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{RATE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement key="" x="432" y="2" width="100" height="19" uuid="dca8fe6a-13cf-44bf-92a1-987963a5c827"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{DOLLAR_TOTAL}==null?0:$F{DOLLAR_TOTAL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="240" y="-1" width="1" height="22" uuid="3d1d76fe-7dcb-46da-8a01-ad134de0424c"/>
+			</line>
+			<line>
+				<reportElement x="16" y="-1" width="1" height="22" uuid="4734c194-a9de-4304-addd-c4d514c47975"/>
+			</line>
+			<line>
+				<reportElement x="380" y="-1" width="1" height="22" uuid="9b8eaa50-38e7-4ab2-8c9d-89d188cb48a5"/>
+			</line>
+			<line>
+				<reportElement x="438" y="-1" width="1" height="22" uuid="ce003b0a-efff-444c-b748-053c9f46bc29"/>
+			</line>
+			<line>
+				<reportElement x="539" y="0" width="1" height="21" uuid="650dbf3d-e6ec-405a-beb2-4234d7075f07"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="24" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<staticText>
+				<reportElement x="418" y="0" width="40" height="24" uuid="e44fc622-48af-4343-8c9d-df026778851e"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="16" y="0" width="524" height="2" uuid="2c4ebb21-8745-45a1-a9ad-477acaac72cb"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#050505"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00#">
+				<reportElement x="461" y="2" width="74" height="20" uuid="8d5f02b4-cbef-40ca-804b-ef8c126d308b"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{sumAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="53" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement style="Column header" x="387" y="33" width="80" height="20" uuid="c9e9a989-76ae-4c92-a08c-dba3c3185f04"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="467" y="33" width="40" height="20" uuid="736cac2d-8f9a-48bb-b4e7-09302ce0e313"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="31" width="197" height="20" uuid="c49bc611-71b3-4860-8112-76288860b48d"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="-15" y="19" width="555" height="1" uuid="30093aa1-3dd7-4eea-9cc9-e183637af8f4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="201" y="35" width="177" height="16" uuid="2dbc15b2-e0c2-4543-b586-36add3f5a00f"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Thank you for your Business]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
